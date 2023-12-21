@@ -125,5 +125,5 @@ class PromoManager {
     }
 }
 
-const manager = new PromoManager(3);
+const manager = new PromoManager(10);
 await manager.startPromoGeneration();
