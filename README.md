@@ -10,3 +10,5 @@ PIAがおススメです。
 http://free-proxy.cz/ja/proxylist/country/JP/all/ping/all
 
 [Python版](https://github.com/JOY6IX9INE/OperaGX-Discord-Promo-Gen)
+
+![image](https://github.com/EdamAme-x/OperaGX-Discord-Nitro-Gen.js/assets/121654029/caf5dc6d-7a2f-45a0-b747-298ec6535cd1)
