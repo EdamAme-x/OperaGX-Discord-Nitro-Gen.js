@@ -21,17 +21,14 @@ class PromoGen {
     yellow = '\x1b[33m(!)\x1b[0m';
     proxies = (Deno.readTextFileSync("proxies.txt")).split("\n");
 
-    private static clientMap = new Map<string, any>();
+    private static clientMap = new Map<string, Deno.HttpClient>();
 
     private async getClient() {
-        if (Math.random() > 0.9) {
-            return ""
-        }
-
         const proxies = this.proxies;
         const proxyUrl = proxyPick(proxies);
 
         if (!PromoGen.clientMap.has(proxyUrl)) {
+            console.log(`${this.getTimestamp()} ${this.green} Created new proxy: ${proxyUrl}`);
             const newClient = await Deno.createHttpClient({
                 proxy: { url: proxyUrl },
             });
@@ -59,12 +56,13 @@ class PromoGen {
             const client = await this.getClient();
 
             const requestOptions: RequestInit & {
-                client: Deno.HttpClient | ""
+                client: Deno.HttpClient
             } = {
                 method: "POST",
                 headers,
                 body: JSON.stringify(data),
-                client,
+                // @ts-ignore NOTE: LIB SIDE ERROR
+                client
             };
 
             const response = await fetch(url, requestOptions);
@@ -86,7 +84,9 @@ class PromoGen {
             } else {
                 console.log(`${this.getTimestamp()} ${this.red} Request failed : ${response.status}`);
             }
-        } catch (_error) {}
+        } catch (_error) {
+            console.log(`${this.getTimestamp()} ${this.red} PROXY ERROR`);
+        }
     }
 
     getTimestamp() {
@@ -125,5 +125,5 @@ class PromoManager {
     }
 }
 
-const manager = new PromoManager(10);
+const manager = new PromoManager(3);
 await manager.startPromoGeneration();
