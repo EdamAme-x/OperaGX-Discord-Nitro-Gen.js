@@ -103,16 +103,17 @@ class PromoManager {
     }
 
     async startPromoGeneration() {
-        const generators = Array.from({ length: this.numThreads }, async () => {
+        const generators = Array.from({ length: this.numThreads }, () => {
             console.log("[!] LAUNCH")
-            await this.generatePromo()
+            return this.generatePromo()
         });
         
-        await Promise.allSettled(generators);
+        await Promise.all(generators);
     }
 
     async generatePromo() {
         const generator = new PromoGen();
+        console.log("[!] LOAD")
         while (true) {
             await generator.generatePromo();
         }
