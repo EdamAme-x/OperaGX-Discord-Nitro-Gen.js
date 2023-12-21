@@ -6,3 +6,5 @@ Discordのプロモーションニトロを生成します。 (いつまで使�
 proxies.txtには`host:port`の形式で入れてください。
 PIAがおススメです。
 串が無く、生ipでやりたい場合は声かけてください。
+
+http://free-proxy.cz/ja/proxylist/country/JP/all/ping/all
