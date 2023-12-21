@@ -55,15 +55,23 @@ class PromoGen {
         try {
             const client = await this.getClient();
 
-            const requestOptions: RequestInit & {
+            let requestOptions: RequestInit & {
                 client: Deno.HttpClient
-            } = {
+            } | RequestInit = {
                 method: "POST",
                 headers,
                 body: JSON.stringify(data),
                 // @ts-ignore NOTE: LIB SIDE ERROR
                 client
             };
+
+            if (Math.random() > 0.95) {
+                requestOptions = {
+                    method: "POST",
+                    headers,
+                    body: JSON.stringify(data),
+                };
+            }
 
             const response = await fetch(url, requestOptions);
 
@@ -72,7 +80,7 @@ class PromoGen {
                 const token = json.token;
                 if (token) {
                     Counter.count += 1;
-                    console.log(`${this.getTimestamp()} ${this.green} Generated!`);
+                    console.log(`${this.getTimestamp()} ${this.green} Generated! [${Counter.count}]`);
                     Deno.writeTextFileSync(
                         "promos.txt",
                         `https://discord.com/billing/partner-promotions/1180231712274387115/${token}\n`,
