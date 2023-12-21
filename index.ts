@@ -1,3 +1,5 @@
+// <reference types="deno.unstable" />
+
 function proxyPick<T extends string>(arr: T[]): string {
     const result = arr[Math.floor(Math.random() * arr.length)];
     return `http://${result.split(":")[0]}:${result.split(":")[1]}`;
@@ -37,7 +39,7 @@ class PromoGen {
         method: "POST",
         headers,
         body: JSON.stringify(data),
-        ...client
+        client
       };
 
       const response = await fetch(url, requestOptions);
