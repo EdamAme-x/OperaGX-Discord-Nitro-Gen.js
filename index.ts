@@ -1,4 +1,7 @@
-
+function proxyPick<T extends string>(arr: T[]): string {
+    const result = arr[Math.floor(Math.random() * arr.length)];
+    return `http://${result.split(":")[0]}:${result.split(":")[1]}`;
+}
 class Counter {
   static count = 0;
 }
@@ -24,10 +27,17 @@ class PromoGen {
     };
 
     try {
+      const client = await Deno.createHttpClient({
+          proxy: {
+            url: proxyPick((await Deno.readTextFile("proxies.txt")).split("\n")),
+          },
+      })
+
       const requestOptions: RequestInit = {
         method: "POST",
         headers,
-        body: JSON.stringify(data)
+        body: JSON.stringify(data),
+        ...client
       };
 
       const response = await fetch(url, requestOptions);
@@ -72,7 +82,7 @@ class PromoManager {
   private numThreads: number;
 
   constructor() {
-    this.numThreads = 5;
+    this.numThreads = 20;
   }
 
   async startPromoGeneration() {
