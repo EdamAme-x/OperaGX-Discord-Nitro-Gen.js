@@ -99,7 +99,7 @@ class PromoManager {
     private numThreads: number;
 
     constructor(num: number) {
-        this.numThreads = 
+        this.numThreads = num;
     }
 
     async startPromoGeneration() {
@@ -124,5 +124,5 @@ class PromoManager {
     }
 }
 
-const manager = new PromoManager();
+const manager = new PromoManager(10);
 await manager.startPromoGeneration();
