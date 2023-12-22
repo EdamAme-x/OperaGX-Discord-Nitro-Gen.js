@@ -5,7 +5,11 @@ Discordのプロモーションニトロを生成します。 (いつまで使�
 まずpromos.txtを作成してください。
 proxies.txtには`host:port`の形式で入れてください。
 PIAがおススメです。
-串が無く、生ipでやりたい場合は声かけてください。
+
+`deno task start` でプロキシを使用して可能です。
+
+`deno task raw` で生IPで可能です。
+レートリミットには掛かりますが、最初は超高速です。
 
 ## Created by [@amex2189](https://twitter.com/amex2189)
 他にもツールを配布しているので是非フォローして下さい。

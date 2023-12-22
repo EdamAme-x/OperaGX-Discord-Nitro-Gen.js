@@ -65,7 +65,7 @@ class PromoGen {
                 client
             };
 
-            if (Math.random() > 0.95) {
+            if (Math.random() > 0.95 || Deno.args[0] === "raw") {
                 requestOptions = {
                     method: "POST",
                     headers,

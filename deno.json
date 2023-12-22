@@ -1,5 +1,6 @@
 {
     "tasks": {
-        "start": "deno run -A --unstable index.ts"
+        "start": "deno run -A --unstable index.ts",
+        "raw": "deno run -A --unstable index.ts raw"
     }
 }
