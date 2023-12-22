@@ -6,7 +6,7 @@ Discordのプロモーションニトロを生成します。 (いつまで使�
 proxies.txtには`host:port`の形式で入れてください。
 PIAがおススメです。
 
-`deno task start` でプロキシを使用して可能です。
+`deno task start` でプロキシを使用して利用可能です。
 
 `deno task raw` で生IPで可能です。
 レートリミットには掛かりますが、最初は超高速です。
