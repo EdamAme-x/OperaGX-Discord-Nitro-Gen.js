@@ -3,6 +3,16 @@ if (!Deno.stat("./promos.txt")) {
     Deno.exit(1)
 }
 
+
+function genString(length: number): string {
+  const characters = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+  let result = '';
+  for (let i = 0; i < length; i++) {
+    result += characters.charAt(Math.floor(Math.random() * characters.length));
+  }
+  return result;
+}
+
 function proxyPick<T extends string>(arr: T[]): string {
     const result = arr[Math.floor(Math.random() * arr.length)];
     return `http://${result.split(":")[0]}:${result.split(":")[1]}`;
@@ -41,15 +51,23 @@ class PromoGen {
     async generatePromo() {
         const url = "https://api.discord.gx.games/v1/direct-fulfillment";
         const headers = new Headers({
-            "Content-Type": "application/json",
-            "Sec-Ch-Ua":
-                '"Opera GX";v="105", "Chromium";v="119", "Not?A_Brand";v="24"',
-            "User-Agent":
-                "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/119.0.0.0 Safari/537.36 OPR/105.0.0.0",
+            'authority': 'api.discord.gx.games',
+            'accept': '*/*',
+            'accept-language': 'en-US,en;q=0.9',
+            'content-type': 'application/json',
+            'origin': 'https://www.opera.com',
+            'referer': 'https://www.opera.com/',
+            'sec-ch-ua': '"Opera GX";v="105", "Chromium";v="119", "Not?A_Brand";v="24"',
+            'sec-ch-ua-mobile': '?0',
+            'sec-ch-ua-platform': '"Windows"',
+            'sec-fetch-dest': 'empty',
+            'sec-fetch-mode': 'cors',
+            'sec-fetch-site': 'cross-site',
+            'user-agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/119.0.0.0 Safari/537.36 OPR/105.0.0.0'
         });
 
         const data = {
-            partnerUserId: crypto.randomUUID(),
+            partnerUserId: genString(64)
         };
 
         try {
